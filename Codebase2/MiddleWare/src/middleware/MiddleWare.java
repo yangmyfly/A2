@@ -265,11 +265,12 @@ public class MiddleWare implements MiddlewareInterface {
                 // MySQL stores booleans and a TinyInt(1), which we interpret
                 // here on the application side as an integer. It works, it just
                 // isn't very elegant.
+                msgString = "";
                 while (res.next()) {
                     shippedStatus = Integer.parseInt(res.getString(8));
 
                     if (shippedStatus == status) {
-                        msgString = prependString + " ORDER # " + res.getString(1) + " : " + res.getString(2)
+                        msgString += prependString + " ORDER # " + res.getString(1) + " : " + res.getString(2)
                                 + " : " + res.getString(3) + " : " + res.getString(4);
                         msgString += "\n";
 
@@ -291,30 +292,13 @@ public class MiddleWare implements MiddlewareInterface {
     }
 
     @Override
-    public String[] getAllItems(String serverIP, String databaseName, String inventoryName, String token) throws RemoteException{
+    public String[] getAllItems(String serverIP, String databaseName, String inventoryName) throws RemoteException{
         String information = "";  /*results including failure information*/
         Connection DBConn = null;           // MySQL connection handle
         Boolean connectError = false;       // Error flag
         ResultSet res = null;               // SQL query result set pointer
         Statement s = null;                 // SQL statement pointer
         
-        LoginAndOut obj = new LoginAndOut();
-        try {
-            if (!obj.isLoggedIn(token)) {
-                information = "Token expired!"
-                String[] result = new String [1];
-                result[0] = information;
-                return result;
-            }
-        } catch (Exception ex) {
-            
-            Logger.getLogger(MiddleWare.class.getName()).log(Level.SEVERE, null, ex);
-            information = "Vaild token failure!"
-            String[] result = new String [1];
-            result[0] = information;
-            return result;
-        }
-
         // connect
         try{
             information = "\n>> Establishing Driver..."; 
@@ -358,7 +342,7 @@ public class MiddleWare implements MiddlewareInterface {
         return result;
     }
     
-    public String[] getSelectedIteam(String inventorySelection, String sTotalCost, String token) throws RemoteException{
+    public String[] getSelectedIteam(String inventorySelection, String sTotalCost) throws RemoteException{
         int beginIndex;                     // Parsing index
         int endIndex;                       // Parsing index
         Float fCost;                        // Item cost
@@ -369,23 +353,6 @@ public class MiddleWare implements MiddlewareInterface {
         
         IndexNotFound = false;
         sCost = null;
-
-        LoginAndOut obj = new LoginAndOut();
-        try {
-            if (!obj.isLoggedIn(token)) {
-                information = "Token expired!"
-                String[] result = new String [1];
-                result[0] = information;
-                return result;
-            }
-        } catch (Exception ex) {
-            
-            Logger.getLogger(MiddleWare.class.getName()).log(Level.SEVERE, null, ex);
-            information = "Vaild token failure!"
-            String[] result = new String [1];
-            result[0] = information;
-            return result;
-        }
         
         if ( inventorySelection != null )
         {
@@ -445,7 +412,7 @@ public class MiddleWare implements MiddlewareInterface {
         }
     }
     
-    public String[] submitOrder(String first, String last, String address, String phone, String serverIP, String sTotalCost, String[] items, String token) throws RemoteException {                                         
+    public String[] submitOrder(String first, String last, String address, String phone, String serverIP, String sTotalCost, String[] items) throws RemoteException {                                         
         // This is the submit order button. This handler will check to make sure
         // that the customer information is provided, then create an entry in
         // the orderinfo::orders table. It will also create another table where
@@ -471,23 +438,6 @@ public class MiddleWare implements MiddlewareInterface {
         String SQLstatement = null;     // String for building SQL queries
         
         String information = "";
-
-        LoginAndOut obj = new LoginAndOut();
-        try {
-            if (!obj.isLoggedIn(token)) {
-                information = "Token expired!"
-                String[] result = new String [1];
-                result[0] = information;
-                return result;
-            }
-        } catch (Exception ex) {
-            
-            Logger.getLogger(MiddleWare.class.getName()).log(Level.SEVERE, null, ex);
-            information = "Vaild token failure!"
-            String[] result = new String [1];
-            result[0] = information;
-            return result;
-        }
 
         // Check to make sure there is a first name, last name, address and phone
         if ((first.length()>0) && (last.length()>0) && (address.length()>0) && (phone.length()>0))
@@ -676,7 +626,7 @@ public class MiddleWare implements MiddlewareInterface {
             } //for each line of text in order table
             
         }
-        String[] result = new String[2];
+        String[] result = new String[4];
         result[0] = information;
         result[1] = information2; 
         return result;

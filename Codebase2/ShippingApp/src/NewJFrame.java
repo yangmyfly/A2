@@ -568,9 +568,9 @@ public class NewJFrame extends javax.swing.JFrame {
             // getting the list of orders that have been shipped. The list of shipped
             // orders is written to jTextArea1.
             HashMap map = new HashMap<String, String>();
-            if (map.get("expired").equals("true")) {
-                sessionTimeOut();
-            } else {
+//            if (map.get("expired").equals("true")) {
+//                sessionTimeOut();
+//            } else {
                 // Clean up the form before we start
                 jTextArea1.setText("");
                 jTextArea2.setText("");
@@ -590,7 +590,7 @@ public class NewJFrame extends javax.swing.JFrame {
                 }
 
                 jTextArea4.setText((String) map.get("message"));
-            }
+//            }
         } // getPendingOrders
         catch (RemoteException ex) {
             Logger.getLogger(NewJFrame.class.getName()).log(Level.SEVERE, null, ex);
