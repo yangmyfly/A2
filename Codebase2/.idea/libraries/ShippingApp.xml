@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="ShippingApp">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/ShippingApp/dist/ShippingApp.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

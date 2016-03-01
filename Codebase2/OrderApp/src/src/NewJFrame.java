@@ -92,12 +92,6 @@ public class NewJFrame extends javax.swing.JFrame {
         jButton7 = new javax.swing.JButton();
         jButton8 = new javax.swing.JButton();
         jButton9 = new javax.swing.JButton();
-        jLabel14 = new javax.swing.JLabel();
-        jTextField7 = new javax.swing.JTextField();
-        jLabel15 = new javax.swing.JLabel();
-        jButton10 = new javax.swing.JButton();
-        jPasswordField1 = new javax.swing.JPasswordField();
-        jLabel16 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -107,11 +101,8 @@ public class NewJFrame extends javax.swing.JFrame {
         jTextArea1.setColumns(20);
         jTextArea1.setRows(5);
         jScrollPane1.setViewportView(jTextArea1);
-        jTextArea1.getAccessibleContext().setAccessibleName("Login");
-        jTextArea1.getAccessibleContext().setAccessibleDescription("");
 
         jButton1.setText("Trees");
-        jButton1.setEnabled(false);
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -119,7 +110,6 @@ public class NewJFrame extends javax.swing.JFrame {
         });
 
         jButton2.setText("Seeds");
-        jButton2.setEnabled(false);
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
@@ -127,7 +117,6 @@ public class NewJFrame extends javax.swing.JFrame {
         });
 
         jButton3.setText("Shrubs");
-        jButton3.setEnabled(false);
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton3ActionPerformed(evt);
@@ -161,7 +150,6 @@ public class NewJFrame extends javax.swing.JFrame {
         jLabel5.setText("Items Selected:");
 
         jButton4.setText("Add to Order");
-        jButton4.setEnabled(false);
         jButton4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton4ActionPerformed(evt);
@@ -178,7 +166,6 @@ public class NewJFrame extends javax.swing.JFrame {
         });
 
         jButton5.setText("Submit Order");
-        jButton5.setEnabled(false);
         jButton5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton5ActionPerformed(evt);
@@ -209,7 +196,6 @@ public class NewJFrame extends javax.swing.JFrame {
 
         jButton6.setText("cultureboxes");
         jButton6.setToolTipText("");
-        jButton6.setEnabled(false);
         jButton6.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton6ActionPerformed(evt);
@@ -218,7 +204,6 @@ public class NewJFrame extends javax.swing.JFrame {
 
         jButton7.setText("genomics");
         jButton7.setToolTipText("");
-        jButton7.setEnabled(false);
         jButton7.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton7ActionPerformed(evt);
@@ -227,7 +212,6 @@ public class NewJFrame extends javax.swing.JFrame {
 
         jButton8.setText("processing");
         jButton8.setToolTipText("");
-        jButton8.setEnabled(false);
         jButton8.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton8ActionPerformed(evt);
@@ -236,28 +220,11 @@ public class NewJFrame extends javax.swing.JFrame {
 
         jButton9.setText("referencematerials");
         jButton9.setToolTipText("");
-        jButton9.setEnabled(false);
         jButton9.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton9ActionPerformed(evt);
             }
         });
-
-        jLabel14.setText("User name");
-
-        jLabel15.setText("Password");
-
-        jButton10.setText("Login");
-        jButton10.setToolTipText("");
-        jButton10.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton10ActionPerformed(evt);
-            }
-        });
-
-        jPasswordField1.setToolTipText("");
-
-        jLabel16.setText("Login First!");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -329,35 +296,14 @@ public class NewJFrame extends javax.swing.JFrame {
                         .addComponent(jButton5))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(187, 187, 187)
-                        .addComponent(jLabel1))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(406, 406, 406)
-                        .addComponent(jLabel14)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel15)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jButton10)
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel16)))
+                        .addComponent(jLabel1)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jLabel1)
-                .addGap(3, 3, 3)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel14)
-                    .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel15)
-                    .addComponent(jButton10)
-                    .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel16))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(25, 25, 25)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
                     .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -414,10 +360,11 @@ public class NewJFrame extends javax.swing.JFrame {
                         .addComponent(jLabel2)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(129, Short.MAX_VALUE))
+                .addContainerGap(142, Short.MAX_VALUE))
         );
 
-        jButton10.getAccessibleContext().setAccessibleName("Login");
+        jButton6.getAccessibleContext().setAccessibleName("cultureboxes");
+        jButton6.getAccessibleContext().setAccessibleDescription("");
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -444,12 +391,9 @@ public class NewJFrame extends javax.swing.JFrame {
             // inventory list window jTextArea1. The line of text is parsed and
             // the relevant information is placed in the order area (jTextArea2).
             
-            String[] msgString = client.getSelectedIteam(jTextArea1.getSelectedText(), jTextField6.getText(), token);
+            String[] msgString = client.getSelectedIteam(jTextArea1.getSelectedText(), jTextField6.getText());
             if (msgString.length == 1) {
                 jTextArea3.append(msgString[0]);
-                if(msgString[0].equals("Token expired!")){
-                    sessionTimeOut();
-                }
             } else {
                 jTextArea2.append(msgString[0]);
                 jTextField6.setText(msgString[1]);
@@ -472,13 +416,10 @@ public class NewJFrame extends javax.swing.JFrame {
             // database as well.
             
             String[] msgString = client.submitOrder(jTextField3.getText(), jTextField4.getText(),
-                    jTextField5.getText(), jTextArea4.getText(), jTextField1.getText(), jTextField6.getText(), jTextArea2.getText().split("\\n"), token);
+                    jTextField5.getText(), jTextArea4.getText(), jTextField1.getText(), jTextField6.getText(), jTextArea2.getText().split("\\n"));
             
             if (msgString.length == 1) {
                 jTextArea3.append(msgString[0]);
-                if(msgString[0].equals("Token expired!")){
-                    sessionTimeOut();
-                }
             } else if (msgString.length == 2) {
                 jTextArea3.append(msgString[0]);
                 String[] items = jTextArea2.getText().split("\\n");
@@ -541,9 +482,6 @@ public class NewJFrame extends javax.swing.JFrame {
             for (int i = 0; i < msgString.length; i++) {
                 jTextArea1.setText(msgString[i]);
             }
-            if(msgString[0].equals("Token expired!")){
-                sessionTimeOut();
-            }
         } catch (RemoteException ex) {
             Logger.getLogger(NewJFrame.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -559,9 +497,6 @@ public class NewJFrame extends javax.swing.JFrame {
             String[] msgString = client.getAllItems(jTextField1.getText(), "inventory", "shrubs");
             for (int i = 0; i < msgString.length; i++) {
                 jTextArea1.setText(msgString[i]);
-            }
-            if(msgString[0].equals("Token expired!")){
-                sessionTimeOut();
             }
         } catch (RemoteException ex) {
             Logger.getLogger(NewJFrame.class.getName()).log(Level.SEVERE, null, ex);
@@ -583,9 +518,6 @@ public class NewJFrame extends javax.swing.JFrame {
             for (int i = 0; i < msgString.length; i++) {
                 jTextArea1.setText(msgString[i]);
             }
-            if(msgString[0].equals("Token expired!")){
-                sessionTimeOut();
-            }
         } catch (RemoteException ex) {
             Logger.getLogger(NewJFrame.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -606,9 +538,6 @@ public class NewJFrame extends javax.swing.JFrame {
         for (int i = 0; i < msgString.length; i++) {
             jTextArea1.setText(msgString[i]);
         }
-        if(msgString[0].equals("Token expired!")){
-            sessionTimeOut();
-        }
     }//GEN-LAST:event_jButton7ActionPerformed
 
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
@@ -621,9 +550,6 @@ public class NewJFrame extends javax.swing.JFrame {
             String[] msgString = client.getAllItems(jTextField1.getText(), "leaftech", "processing");
             for (int i = 0; i < msgString.length; i++) {
                 jTextArea1.setText(msgString[i]);
-            }
-            if(msgString[0].equals("Token expired!")){
-                sessionTimeOut();
             }
         } catch (RemoteException ex) {
             Logger.getLogger(NewJFrame.class.getName()).log(Level.SEVERE, null, ex);
@@ -641,102 +567,11 @@ public class NewJFrame extends javax.swing.JFrame {
             for (int i = 0; i < msgString.length; i++) {
                 jTextArea1.setText(msgString[i]);
             }
-            if(msgString[0].equals("Token expired!")){
-                sessionTimeOut();
-            }
         } catch (RemoteException ex) {
             Logger.getLogger(NewJFrame.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jButton9ActionPerformed
 
-    private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
-        // login:
-        if (jButton10.getText() == "Login") {
-            try {
-                String username;
-                char[] password;
-                username = jTextField7.getText();
-                password = jPasswordField1.getPassword();
-                token = client.login(username, password);
-                System.out.println("Thank you : " + token);
-                if (!token.trim().equals("Error")) {
-                    loggedIn(username);
-                } else {
-                    token = "";
-                    jLabel16.setText("Wrong Username Password. Please Try again.");
-                }
-            } catch (RemoteException ex) {
-                jLabel16.setText("RemoteException.");
-                Logger.getLogger(NewJFrame.class.getName()).log(Level.SEVERE, null, ex);
-            }
-
-        } else {
-
-            try {
-                if (client.logout(token)) {
-                    notLoggedIn();
-                } else {
-                    jLabel16.setText("Something went wrong. Please Try again.");
-                }
-            } catch (RemoteException ex) {
-                jLabel16.setText("RemoteException.");
-                Logger.getLogger(NewJFrame.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }           
-    }//GEN-LAST:event_jButton10ActionPerformed
-
-    public void notLoggedIn() {
-        jButton1.setEnabled(false);
-        jButton2.setEnabled(false);
-        jButton3.setEnabled(false);
-        jButton4.setEnabled(false);
-        jButton5.setEnabled(false);
-        jButton6.setEnabled(false);
-        jButton7.setEnabled(false);
-        jButton8.setEnabled(false);
-        jButton9.setEnabled(false);
-        
-        jTextField7.setEditable(true);
-        jPasswordField1.setEditable(true);
-        jButton10.setEnabled(true);
-        
-        jButton7.setText("Login");
-        jLabel16.setText("Login To Continue");
-        
-        jTextArea1.setText("");
-        jTextArea2.setText("");
-        jTextArea3.setText("");
-        jTextArea4.setText("");
-        jTextField3.setText("");
-        jTextField4.setText("");
-        jTextField5.setText("");
-        jTextField6.setText("");
-    }
-
-    public void loggedIn(String username) {
-        jButton1.setEnabled(true);
-        jButton2.setEnabled(true);
-        jButton3.setEnabled(true);
-        jButton4.setEnabled(true);
-        jButton5.setEnabled(true);
-        jButton6.setEnabled(true);
-        jButton7.setEnabled(true);
-        jButton8.setEnabled(true);
-        jButton9.setEnabled(true);
-        
-        jTextField7.setEditable(false);
-        jPasswordField1.setEditable(false);
-        jButton10.setEnabled(false);
-        
-        jButton10.setText("Logout");
-        jLabel16.setText("Logged In as " + username);
-    }
-
-    private void sessionTimeOut() {
-        notLoggedIn();
-        jLabel16.setText("Session Timed Out");
-    }
-    
     /**
      * @param args the command line arguments
      */
@@ -750,7 +585,6 @@ public class NewJFrame extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton10;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
@@ -764,9 +598,6 @@ public class NewJFrame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
-    private javax.swing.JLabel jLabel14;
-    private javax.swing.JLabel jLabel15;
-    private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -775,7 +606,6 @@ public class NewJFrame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JPasswordField jPasswordField1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
@@ -789,7 +619,6 @@ public class NewJFrame extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField4;
     private javax.swing.JTextField jTextField5;
     private javax.swing.JTextField jTextField6;
-    private javax.swing.JTextField jTextField7;
     // End of variables declaration//GEN-END:variables
 
 }

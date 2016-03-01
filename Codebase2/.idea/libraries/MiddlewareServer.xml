@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="MiddlewareServer">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/MiddlewareServer/dist/MiddlewareServer.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

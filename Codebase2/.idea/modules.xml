@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/InventoryMgr/InventoryMgr.iml" filepath="$PROJECT_DIR$/InventoryMgr/InventoryMgr.iml" />
+      <module fileurl="file://$PROJECT_DIR$/MiddleWare/MiddleWare.iml" filepath="$PROJECT_DIR$/MiddleWare/MiddleWare.iml" />
+      <module fileurl="file://$PROJECT_DIR$/MiddlewareServer/MiddlewareServer.iml" filepath="$PROJECT_DIR$/MiddlewareServer/MiddlewareServer.iml" />
+      <module fileurl="file://$PROJECT_DIR$/OrderApp/OrderApp.iml" filepath="$PROJECT_DIR$/OrderApp/OrderApp.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ShippingApp/ShippingApp.iml" filepath="$PROJECT_DIR$/ShippingApp/ShippingApp.iml" />
+    </modules>
+  </component>
+</project>

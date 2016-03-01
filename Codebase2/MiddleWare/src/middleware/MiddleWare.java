@@ -265,12 +265,11 @@ public class MiddleWare implements MiddlewareInterface {
                 // MySQL stores booleans and a TinyInt(1), which we interpret
                 // here on the application side as an integer. It works, it just
                 // isn't very elegant.
-                msgString = "";
                 while (res.next()) {
                     shippedStatus = Integer.parseInt(res.getString(8));
 
                     if (shippedStatus == status) {
-                        msgString += prependString + " ORDER # " + res.getString(1) + " : " + res.getString(2)
+                        msgString = prependString + " ORDER # " + res.getString(1) + " : " + res.getString(2)
                                 + " : " + res.getString(3) + " : " + res.getString(4);
                         msgString += "\n";
 
