@@ -444,7 +444,7 @@ public class NewJFrame extends javax.swing.JFrame {
             // inventory list window jTextArea1. The line of text is parsed and
             // the relevant information is placed in the order area (jTextArea2).
             
-            String[] msgString = client.getSelectedIteam(jTextArea1.getSelectedText(), jTextField6.getText(), token);
+            String[] msgString = client.getSelectedIteam(jTextArea1.getSelectedText(), jTextField6.getText());
             if (msgString.length == 1) {
                 jTextArea3.append(msgString[0]);
                 if(msgString[0].equals("Token expired!")){
@@ -472,7 +472,7 @@ public class NewJFrame extends javax.swing.JFrame {
             // database as well.
             
             String[] msgString = client.submitOrder(jTextField3.getText(), jTextField4.getText(),
-                    jTextField5.getText(), jTextArea4.getText(), jTextField1.getText(), jTextField6.getText(), jTextArea2.getText().split("\\n"), token);
+                    jTextField5.getText(), jTextArea4.getText(), jTextField1.getText(), jTextField6.getText(), jTextArea2.getText().split("\\n"));
             
             if (msgString.length == 1) {
                 jTextArea3.append(msgString[0]);
