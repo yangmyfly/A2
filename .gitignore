@@ -1,2 +1,5 @@
+#ignore all kind of files
 *
-!./*/*/src/*
+#except php files
+!*.java
+!*.form
