@@ -304,7 +304,7 @@ public class MiddleWare implements MiddlewareInterface {
         // connect
         try{
             if (!LoginAndOut.isLoggedIn(token)) {
-                return error;
+                return null;
             }
             information = "\n>> Establishing Driver..."; 
             Class.forName("com.mysql.jdbc.Driver");
