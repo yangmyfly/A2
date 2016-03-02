@@ -416,7 +416,7 @@ public class NewJFrame extends javax.swing.JFrame {
             // database as well.
             
             String[] msgString = client.submitOrder(jTextField3.getText(), jTextField4.getText(),
-                    jTextField5.getText(), jTextArea4.getText(), jTextField1.getText(), jTextField6.getText(), jTextArea2.getText().split("\\n"));
+                    jTextField5.getText(), jTextArea4.getText(), jTextField1.getText(), jTextField6.getText(), jTextArea2.getText().split("\\n"),"");
             
             if (msgString.length == 1) {
                 jTextArea3.append(msgString[0]);
