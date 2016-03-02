@@ -664,6 +664,15 @@ public class MiddleWare implements MiddlewareInterface {
         String SQLstatement = null;     // String for building SQL queries
 
         String responseInformation = "";  //response information
+
+        try {
+            if (!LoginAndOut.isLoggedIn(token)) {
+                return "falseAuth";
+            }
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+
         try
         {
             responseInformation += "\n" + ">> Establishing Driver...";
@@ -798,6 +807,14 @@ public class MiddleWare implements MiddlewareInterface {
         String SQLstatement = null;     // String for building SQL queries
 
         String responseInformation = "";  //response information
+
+        try {
+            if (!LoginAndOut.isLoggedIn(token)) {
+                return "falseAuth";
+            }
+        }catch(Exception e){
+            e.printStackTrace();
+        }
         try
         {
             responseInformation += "\n" + ">> Establishing Driver...";
@@ -872,6 +889,14 @@ public class MiddleWare implements MiddlewareInterface {
         String SQLstatement2 = null;        // String for building SQL queries
 
         String responseInformation = "";  //response information
+
+        try {
+            if (!LoginAndOut.isLoggedIn(token)) {
+                return "falseAuth";
+            }
+        }catch(Exception e){
+            e.printStackTrace();
+        }
         try
         {
             responseInformation += "\n" + ">> Establishing Driver...";
@@ -1007,6 +1032,14 @@ public class MiddleWare implements MiddlewareInterface {
         java.sql.Statement s = null;    // SQL statement pointer
 
         String responseInformation = "";  //response information
+
+        try {
+            if (!LoginAndOut.isLoggedIn(token)) {
+                return "falseAuth";
+            }
+        }catch(Exception e){
+            e.printStackTrace();
+        }
         try
         {
             responseInformation += "\n" + ">> Establishing Driver...";
