@@ -9,7 +9,7 @@ import java.sql.Statement;
 
 public class InventoryApp {
 
-    public String addItems(String SQLServerIP, String databaseName, String inventoryName, String productID, String description, Integer quantity, Float perUnitCost){
+    public String addItems(String SQLServerIP, String databaseName, String inventoryName, String productID, String description, Integer quantity, Float perUnitCost, String token){
         Boolean connectError = false;   // Error flag
         Connection DBConn = null;       // MySQL connection handle
         Boolean executeError = false;   // Error flag
@@ -143,7 +143,7 @@ public class InventoryApp {
         return responseInformation;
     }
 
-    public String deleteItems(String SQLServerIP, String databaseName, String inventoryName, String productID){
+    public String deleteItems(String SQLServerIP, String databaseName, String inventoryName, String productID, String token){
         Boolean connectError = false;   // Error flag
         Connection DBConn = null;       // MySQL connection handle
         Boolean executeError = false;   // Error flag
@@ -216,7 +216,7 @@ public class InventoryApp {
         return responseInformation;
     }
 
-    public String decrementItems(String SQLServerIP, String databaseName, String inventoryName, String productID){
+    public String decrementItems(String SQLServerIP, String databaseName, String inventoryName, String productID, String token){
         Boolean connectError = false;   // Error flag
         Connection DBConn = null;       // MySQL connection handle
         Boolean executeError = false;   // Error flag
@@ -354,7 +354,7 @@ public class InventoryApp {
         return responseInformation;
     }
 
-    public String getAllItems(String SQLServerIP, String databaseName, String inventoryName){
+    public String getItems(String SQLServerIP, String databaseName, String inventoryName, String token){
         Boolean connectError = false;   // Error flag
         Connection DBConn = null;       // MySQL connection handle
         Boolean executeError = false;   // Error flag

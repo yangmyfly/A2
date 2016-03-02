@@ -27,6 +27,14 @@ public interface MiddlewareInterface extends Remote {
      public String[] getAllItems(String serverIP, String databaseName, String inventoryName, String token) throws RemoteException;
      
      public String[] getSelectedIteam(String inventorySelection, String sTotalCost, String token) throws RemoteException;
-     
+
      public String[] submitOrder(String first, String last, String address, String phone, String serverIP, String sTotalCost, String[] items, String token) throws RemoteException;
+
+     public String addItems(String SQLServerIP, String databaseName, String inventoryName, String productID, String description, Integer quantity, Float perUnitCost, String token) throws RemoteException;
+
+    public String deleteItems(String SQLServerIP, String databaseName, String inventoryName, String productID, String token) throws RemoteException;
+
+    public String decrementItems(String SQLServerIP, String databaseName, String inventoryName, String productID, String token) throws RemoteException;
+
+    public String getItems(String SQLServerIP, String databaseName, String inventoryName, String token) throws RemoteException;
 }

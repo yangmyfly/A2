@@ -1,8 +1,13 @@
 
 import javax.swing.*;
+import java.rmi.Naming;
+import java.rmi.RemoteException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import middleware.MiddlewareInterface;
 
 /******************************************************************************
  * File:NewJFrame.java
@@ -29,12 +34,22 @@ import java.sql.ResultSet;
  */
 public class InventoryMainFrame extends javax.swing.JFrame {
 
-       String versionID = "v2.10.10";
+    String token = "sfsdf";
+    String versionID = "v2.10.10";
+
+    /*handle all database operations*/
+    MiddlewareInterface api;
 
     /** Creates new form AddInventoryMainFrame */
     public InventoryMainFrame() {
-        initComponents();
-        jLabel1.setText("Inventory Management Application " + versionID);
+
+        try {
+            initComponents();
+            api = (MiddlewareInterface) Naming.lookup("//127.0.0.1:5050/middleware");
+            jLabel1.setText("Inventory Management Application " + versionID);
+        } catch (Exception ex) {
+            Logger.getLogger(InventoryMainFrame.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /** This method is called from within the constructor to
@@ -471,417 +486,429 @@ public class InventoryMainFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_jRadioButton7ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        try {
+            // Adds inventory to database
 
-        // Adds inventory to database
+            String description;             // Tree, seed, or shrub description
+            String errString = null;        // String for displaying errors
+            Boolean fieldError = false;     // Error flag
+            String msgString = null;        // String for displaying non-error messages
+            String tableSelected = null;    // String used to determine which data table to use
+            Integer quantity;               // Quantity of trees, seeds, or shrubs
+            Float perUnitCost;              // Cost per tree, seed, or shrub unit
+            String productID = null;        // Product id of tree, seed, or shrub
 
-        String description;             // Tree, seed, or shrub description
-        String errString = null;        // String for displaying errors
-        Boolean fieldError = false;     // Error flag
-        String msgString = null;        // String for displaying non-error messages
-        String tableSelected = null;    // String used to determine which data table to use
-        Integer quantity;               // Quantity of trees, seeds, or shrubs
-        Float perUnitCost;              // Cost per tree, seed, or shrub unit
-        String productID = null;        // Product id of tree, seed, or shrub
+            String SQLServerIP = jTextField1.getText();
+            // Check to make sure a radio button is selected
 
-        String SQLServerIP = jTextField1.getText();
-        // Check to make sure a radio button is selected
+            jTextArea1.setText("");
 
-        jTextArea1.setText("");
-        
-        if (!jRadioButton1.isSelected() && !jRadioButton2.isSelected() && !jRadioButton3.isSelected() && !jRadioButton4.isSelected() && !jRadioButton5.isSelected() && !jRadioButton6.isSelected() && !jRadioButton7.isSelected())
-        {
-            fieldError = true;
-            jTextArea1.append("\nMust select Tree, Seeds, or Shrubs or culture boxes, processing, reference materials, Genomics radio button.");
-
-        } else {
-       
-            //Make sure there is a product description
-            if ( jTextField5.getText().length() == 0 )
+            if (!jRadioButton1.isSelected() && !jRadioButton2.isSelected() && !jRadioButton3.isSelected() && !jRadioButton4.isSelected() && !jRadioButton5.isSelected() && !jRadioButton6.isSelected() && !jRadioButton7.isSelected())
             {
                 fieldError = true;
-                jTextArea1.append("\nMust enter a product description.");
-                
+                jTextArea1.append("\nMust select Tree, Seeds, or Shrubs or culture boxes, processing, reference materials, Genomics radio button.");
+
             } else {
-     
-                //Make sure there is a product ID
-                if ( jTextField2.getText().length() == 0 )
+
+                //Make sure there is a product description
+                if ( jTextField5.getText().length() == 0 )
                 {
                     fieldError = true;
-                    jTextArea1.append("\nMust enter a product ID.");
+                    jTextArea1.append("\nMust enter a product description.");
+
                 } else {
-            
-                    //Make sure there is a price
-                    if ( jTextField3.getText().length() == 0 )
+
+                    //Make sure there is a product ID
+                    if ( jTextField2.getText().length() == 0 )
                     {
                         fieldError = true;
-                        jTextArea1.append("\nMust enter a product price.");
+                        jTextArea1.append("\nMust enter a product ID.");
                     } else {
-                    
-                        //Make sure quantity is specified
-                        if ( jTextField4.getText().length() == 0 )
+
+                        //Make sure there is a price
+                        if ( jTextField3.getText().length() == 0 )
                         {
                             fieldError = true;
-                            jTextArea1.append("\nMust enter a product quantity.");
-                        } // quantity
-                    } // price
-                } // product ID
-            } //product description
-        } //category selected
+                            jTextArea1.append("\nMust enter a product price.");
+                        } else {
+
+                            //Make sure quantity is specified
+                            if ( jTextField4.getText().length() == 0 )
+                            {
+                                fieldError = true;
+                                jTextArea1.append("\nMust enter a product quantity.");
+                            } // quantity
+                        } // price
+                    } // product ID
+                } //product description
+            } //category selected
 
 
-        if ( !fieldError )
-        {
-            // get the data from the text fields
-            description = jTextField5.getText();
-            productID = jTextField2.getText();
-            quantity = Integer.parseInt(jTextField4.getText());
-            perUnitCost = Float.parseFloat(jTextField3.getText());
-
-            InventoryApp api = new InventoryApp();
-
-
-            // if trees are selected then insert inventory into trees
-            // table
-            if (jRadioButton1.isSelected())
+            if ( !fieldError )
             {
-                msgString = api.addItems(SQLServerIP, "inventory", "trees", productID, description, quantity, perUnitCost);
-            }
+                // get the data from the text fields
+                description = jTextField5.getText();
+                productID = jTextField2.getText();
+                quantity = Integer.parseInt(jTextField4.getText());
+                perUnitCost = Float.parseFloat(jTextField3.getText());
 
-            // if shrubs are selected then insert inventory into strubs
-            // table
-            if (jRadioButton2.isSelected())
-            {
-                msgString = api.addItems(SQLServerIP, "inventory", "shrubs", productID, description, quantity, perUnitCost);
-            }
 
-            // if seeds are selected then insert inventory into seeds
-            // table
-            if (jRadioButton3.isSelected())
-            {
-                msgString = api.addItems(SQLServerIP, "inventory", "seeds", productID, description, quantity, perUnitCost);
-            }
+                // if trees are selected then insert inventory into trees
+                // table
+                if (jRadioButton1.isSelected())
+                {
+                    msgString = api.addItems(SQLServerIP, "inventory", "trees", productID, description, quantity, perUnitCost, token);
+                }
 
-            if (jRadioButton4.isSelected())
-            {
-                msgString = api.addItems(SQLServerIP, "leaftech", "cultureboxes", productID, description, quantity, perUnitCost);
-            }
+                // if shrubs are selected then insert inventory into strubs
+                // table
+                if (jRadioButton2.isSelected())
+                {
+                    msgString = api.addItems(SQLServerIP, "inventory", "shrubs", productID, description, quantity, perUnitCost, token);
+                }
 
-            if (jRadioButton5.isSelected())
-            {
-                msgString = api.addItems(SQLServerIP, "leaftech", "processing", productID, description, quantity, perUnitCost);
-            }
+                // if seeds are selected then insert inventory into seeds
+                // table
+                if (jRadioButton3.isSelected())
+                {
+                    msgString = api.addItems(SQLServerIP, "inventory", "seeds", productID, description, quantity, perUnitCost, token);
+                }
 
-            if (jRadioButton6.isSelected())
-            {
-                msgString = api.addItems(SQLServerIP, "leaftech", "referencematerials", productID, description, quantity, perUnitCost);
-            }
+                if (jRadioButton4.isSelected())
+                {
+                    msgString = api.addItems(SQLServerIP, "leaftech", "cultureboxes", productID, description, quantity, perUnitCost, token);
+                }
 
-            if (jRadioButton7.isSelected())
-            {
-                msgString = api.addItems(SQLServerIP, "leaftech", "genomics", productID, description, quantity, perUnitCost);
-            }
+                if (jRadioButton5.isSelected())
+                {
+                    msgString = api.addItems(SQLServerIP, "leaftech", "processing", productID, description, quantity, perUnitCost, token);
+                }
 
-            jTextArea1.setText(msgString);
+                if (jRadioButton6.isSelected())
+                {
+                    msgString = api.addItems(SQLServerIP, "leaftech", "referencematerials", productID, description, quantity, perUnitCost, token);
+                }
 
-        } // fieldError check
+                if (jRadioButton7.isSelected())
+                {
+                    msgString = api.addItems(SQLServerIP, "leaftech", "genomics", productID, description, quantity, perUnitCost, token);
+                }
+
+                jTextArea1.setText(msgString);
+
+            } // fieldError check
+
+        } catch (RemoteException ex) {
+            Logger.getLogger(InventoryMainFrame.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
 
 
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // This button will list the inventory for the product selected by the
-        // radio button
 
-        Boolean fieldError = true;      // Error flag
-        String msgString = null;        // String for displaying non-error messages
-        String SQLServerIP = jTextField1.getText();
+        try {
+            Boolean fieldError = true;      // Error flag
+            String msgString = null;        // String for displaying non-error messages
+            String SQLServerIP = jTextField1.getText();
 
-        // Check to make sure a radio button is selected
-        if (jRadioButton1.isSelected() || jRadioButton2.isSelected() || jRadioButton3.isSelected()
-                || jRadioButton4.isSelected() || jRadioButton5.isSelected() || jRadioButton6.isSelected()
-                || jRadioButton7.isSelected())
-        {
-            fieldError = false;
+            // Check to make sure a radio button is selected
+            if (jRadioButton1.isSelected() || jRadioButton2.isSelected() || jRadioButton3.isSelected()
+                    || jRadioButton4.isSelected() || jRadioButton5.isSelected() || jRadioButton6.isSelected()
+                    || jRadioButton7.isSelected())
+            {
+                fieldError = false;
 
-        } else {
+            } else {
 
-            msgString = "Must select Tree, Seeds, or Shrubs radio button or Culture Boxes, Processing, Reference Material or Genomics";
-            jTextArea1.setText("\n"+msgString);
+                msgString = "Must select Tree, Seeds, or Shrubs radio button or Culture Boxes, Processing, Reference Material or Genomics";
+                jTextArea1.setText("\n"+msgString);
+            }
+
+
+            //Now, we try to connect to the inventory database.
+            if (!fieldError)
+            {
+                //Clear the fields - they are not needed and may cause confusion
+                jTextField2.setText("");
+                jTextField3.setText("");
+                jTextField4.setText("");
+                jTextField5.setText("");
+                jTextArea1.setText("");
+
+                jTextArea1.setText("");
+
+
+                // now we build a query to list the inventory table contents
+                // for the user
+                // ... here is the SQL for trees
+                if (jRadioButton1.isSelected())
+                {
+                    System.out.println(token);
+                    System.out.println(SQLServerIP);
+                    msgString = api.getItems(SQLServerIP, "inventory", "trees", token);
+                }
+                // ... here is the SQL for shrubs
+                if (jRadioButton2.isSelected())
+                {
+                    msgString = api.getItems(SQLServerIP, "inventory", "shrubs", token);
+                }
+                // ... here is the SQL for seeds
+                if (jRadioButton3.isSelected())
+                {
+                    msgString = api.getItems(SQLServerIP, "inventory", "seeds", token);
+                }
+                // ... here is the SQL for culture boxes
+                if (jRadioButton4.isSelected())
+                {
+                    msgString = api.getItems(SQLServerIP, "leaftech", "cultureboxes", token);
+                }
+                // ... here is the SQL for processing
+                if (jRadioButton5.isSelected())
+                {
+                    msgString = api.getItems(SQLServerIP, "leaftech", "processing", token);
+                }
+                // ... here is the SQL for reference materials
+                if (jRadioButton6.isSelected())
+                {
+                    msgString = api.getItems(SQLServerIP, "leaftech", "referencematerials", token);
+                }
+                // ... here is the SQL for genomics
+                if (jRadioButton7.isSelected())
+                {
+                    msgString = api.getItems(SQLServerIP, "leaftech", "genomics", token);
+                }
+                jTextArea1.setText(msgString);
+
+            } // fielderror check - make sure a product is selected
+
+            //If there is not connection error, then we form the SQL statement
+            //and then execute it.
+        } catch (RemoteException ex) {
+            Logger.getLogger(InventoryMainFrame.class.getName()).log(Level.SEVERE, null, ex);
         }
-
-
-        //Now, we try to connect to the inventory database.
-        if (!fieldError)
-        {
-            //Clear the fields - they are not needed and may cause confusion
-            jTextField2.setText("");
-            jTextField3.setText("");
-            jTextField4.setText("");
-            jTextField5.setText("");
-            jTextArea1.setText("");
-
-            jTextArea1.setText("");
-
-            InventoryApp api = new InventoryApp();
-
-            // now we build a query to list the inventory table contents
-            // for the user
-            // ... here is the SQL for trees
-            if (jRadioButton1.isSelected())
-            {
-                msgString = api.getAllItems(SQLServerIP, "inventory", "trees");
-            }
-            // ... here is the SQL for shrubs
-            if (jRadioButton2.isSelected())
-            {
-                msgString = api.getAllItems(SQLServerIP, "inventory", "shrubs");
-            }
-            // ... here is the SQL for seeds
-            if (jRadioButton3.isSelected())
-            {
-                msgString = api.getAllItems(SQLServerIP, "inventory", "seeds");
-            }
-            // ... here is the SQL for culture boxes
-            if (jRadioButton4.isSelected())
-            {
-                msgString = api.getAllItems(SQLServerIP, "leaftech", "cultureboxes");
-            }
-            // ... here is the SQL for processing
-            if (jRadioButton5.isSelected())
-            {
-                msgString = api.getAllItems(SQLServerIP, "leaftech", "processing");
-            }
-            // ... here is the SQL for reference materials
-            if (jRadioButton6.isSelected())
-            {
-                msgString = api.getAllItems(SQLServerIP, "leaftech", "referencematerials");
-            }
-            // ... here is the SQL for genomics
-            if (jRadioButton7.isSelected())
-            {
-                msgString = api.getAllItems(SQLServerIP, "leaftech", "genomics");
-            }
-            jTextArea1.setText(msgString);
-
-        } // fielderror check - make sure a product is selected
-    
-        //If there is not connection error, then we form the SQL statement
-        //and then execute it.
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // Deletes an item from the database
-        
-        int beginIndex;                     // Parsing index
-        int endIndex;                       // Parsing index
-        String productID = null;            // Product ID pnemonic
-        Boolean IndexNotFound;              // Flag indicating a string index was not found.
-        String msgString = null;            // String for displaying non-error messages
-        String inventorySelection = null;   // Inventory text string selected by user
-        IndexNotFound = false;              // Flag indicating that a string index was not found
-        String SQLServerIP = jTextField1.getText();
-        
-        // this is the selected line of text
-        inventorySelection =  jTextArea1.getSelectedText();
 
-        // make sure the selection is not blank
-        if ( inventorySelection != null )
-        {
-            // get the product ID - here we get the leading index
-            beginIndex = 0;
-            endIndex = inventorySelection.indexOf(">>",beginIndex);
+        try {
+            int beginIndex;                     // Parsing index
+            int endIndex;                       // Parsing index
+            String productID = null;            // Product ID pnemonic
+            Boolean IndexNotFound;              // Flag indicating a string index was not found.
+            String msgString = null;            // String for displaying non-error messages
+            String inventorySelection = null;   // Inventory text string selected by user
+            IndexNotFound = false;              // Flag indicating that a string index was not found
+            String SQLServerIP = jTextField1.getText();
 
-            if (endIndex < 0 ) {
-                IndexNotFound = true;
-            } else {
-                beginIndex = endIndex+2; //skip past ">>"                                
-            }
-            
-            if ( !IndexNotFound )
+            // this is the selected line of text
+            inventorySelection =  jTextArea1.getSelectedText();
+
+            // make sure the selection is not blank
+            if ( inventorySelection != null )
             {
-                // Here we get the trailing index and parse out the productID
-                endIndex = inventorySelection.indexOf(":",beginIndex);
+                // get the product ID - here we get the leading index
+                beginIndex = 0;
+                endIndex = inventorySelection.indexOf(">>",beginIndex);
 
                 if (endIndex < 0 ) {
                     IndexNotFound = true;
                 } else {
-                    productID = inventorySelection.substring(beginIndex,endIndex);
-                }              
-            }
-           
-            // Now we delete the inventory item indicated by the productID we
-            // parsed out above from the indicated table.
-            
-            if ( !IndexNotFound )
-            {
-                jTextArea1.setText("");
-                jTextArea1.append( "Deleting ProductID: " + productID );
-
-                InventoryApp api = new InventoryApp();
-                // if trees inventory selected
-                if (jRadioButton1.isSelected())
-                {
-                    msgString = api.deleteItems(SQLServerIP, "inventory", "trees", productID);
+                    beginIndex = endIndex+2; //skip past ">>"
                 }
 
-                // if shrubs inventory selected
-                if (jRadioButton2.isSelected())
+                if ( !IndexNotFound )
                 {
-                    msgString = api.deleteItems(SQLServerIP, "inventory", "shrubs", productID);
+                    // Here we get the trailing index and parse out the productID
+                    endIndex = inventorySelection.indexOf(":",beginIndex);
+
+                    if (endIndex < 0 ) {
+                        IndexNotFound = true;
+                    } else {
+                        productID = inventorySelection.substring(beginIndex,endIndex);
+                    }
                 }
 
-                // if seeds inventory selected
-                if (jRadioButton3.isSelected())
+                // Now we delete the inventory item indicated by the productID we
+                // parsed out above from the indicated table.
+
+                if ( !IndexNotFound )
                 {
-                    msgString = api.deleteItems(SQLServerIP, "inventory", "seeds", productID);
+                    jTextArea1.setText("");
+                    jTextArea1.append( "Deleting ProductID: " + productID );
+
+                    // if trees inventory selected
+                    if (jRadioButton1.isSelected())
+                    {
+                        msgString = api.deleteItems(SQLServerIP, "inventory", "trees", productID, token);
+                    }
+
+                    // if shrubs inventory selected
+                    if (jRadioButton2.isSelected())
+                    {
+                        msgString = api.deleteItems(SQLServerIP, "inventory", "shrubs", productID, token);
+                    }
+
+                    // if seeds inventory selected
+                    if (jRadioButton3.isSelected())
+                    {
+                        msgString = api.deleteItems(SQLServerIP, "inventory", "seeds", productID, token);
+                    }
+
+                    // if cultureboxes leaftech selected
+                    if (jRadioButton4.isSelected())
+                    {
+                        msgString = api.deleteItems(SQLServerIP, "leaftech", "cultureboxes", productID, token);
+                    }
+
+                    // if processing leaftech selected
+                    if (jRadioButton5.isSelected())
+                    {
+                        msgString = api.deleteItems(SQLServerIP, "leaftech", "processing", productID, token);
+                    }
+
+                    // if referencematerials leaftech selected
+                    if (jRadioButton6.isSelected())
+                    {
+                        msgString = api.deleteItems(SQLServerIP, "leaftech", "referencematerials", productID, token);
+                    }
+
+                    // if genomics leaftech selected
+                    if (jRadioButton7.isSelected())
+                    {
+                        msgString = api.deleteItems(SQLServerIP, "leaftech", "genomics", productID, token);
+                    }
+
+                    jTextArea1.append("\n\n" + productID + " deleted...");
+                    jTextArea1.append("\n Number of items deleted: " + msgString );
+
+
+                } else {
+
+                    jTextArea1.setText("");
+                    jTextArea1.append("\nNo items selected...\nSELECT ENTIRE INVENTORY LINE TO ADD ITEM TO ORDER\n(TRIPLE CLICK ITEM LINE)");
+
                 }
-
-                // if cultureboxes leaftech selected
-                if (jRadioButton4.isSelected())
-                {
-                    msgString = api.deleteItems(SQLServerIP, "leaftech", "cultureboxes", productID);
-                }
-
-                // if processing leaftech selected
-                if (jRadioButton5.isSelected())
-                {
-                    msgString = api.deleteItems(SQLServerIP, "leaftech", "processing", productID);
-                }
-
-                // if referencematerials leaftech selected
-                if (jRadioButton6.isSelected())
-                {
-                    msgString = api.deleteItems(SQLServerIP, "leaftech", "referencematerials", productID);
-                }
-
-                // if genomics leaftech selected
-                if (jRadioButton7.isSelected())
-                {
-                    msgString = api.deleteItems(SQLServerIP, "leaftech", "genomics", productID);
-                }
-
-                jTextArea1.append("\n\n" + productID + " deleted...");
-                jTextArea1.append("\n Number of items deleted: " + msgString );
-
-                                       
             } else {
 
                 jTextArea1.setText("");
-                jTextArea1.append("\nNo items selected...\nSELECT ENTIRE INVENTORY LINE TO ADD ITEM TO ORDER\n(TRIPLE CLICK ITEM LINE)");      
+                jTextArea1.append("\nNo items selected...\nSELECT ENTIRE INVENTORY LINE TO ADD ITEM TO ORDER\n(TRIPLE CLICK ITEM LINE)");
 
-            }
-        } else {
-
-            jTextArea1.setText("");
-            jTextArea1.append("\nNo items selected...\nSELECT ENTIRE INVENTORY LINE TO ADD ITEM TO ORDER\n(TRIPLE CLICK ITEM LINE)"); 
-
-        } // Blank string check        
-        
+            } // Blank string check
+        } catch (RemoteException ex) {
+            Logger.getLogger(InventoryMainFrame.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // Decrements the inventory count for a selected item
-        int beginIndex;                     // Parsing index
-        int endIndex;                       // Parsing index
-        String productID = null;            // Product ID pnemonic
-        Boolean IndexNotFound;              // Flag indicating a string index was not found.
-        String msgString = null;            // String for displaying non-error messages
-        java.sql.Statement s = null;        // SQL statement pointer
-        String inventorySelection = null;   // Inventory text string selected by user
-        IndexNotFound = false;              // Flag indicating that a string index was not found
-        String SQLServerIP = jTextField1.getText();
-        
-        // this is the selected line of text
-        inventorySelection =  jTextArea1.getSelectedText();
 
-        // make sure the selection is not blank
-        if ( inventorySelection != null )
-        {
-            // get the product ID - here we get the leading index
-            beginIndex = 0;
-            endIndex = inventorySelection.indexOf(">>",beginIndex);
+        try {
+            int beginIndex;                     // Parsing index
+            int endIndex;                       // Parsing index
+            String productID = null;            // Product ID pnemonic
+            Boolean IndexNotFound;              // Flag indicating a string index was not found.
+            String msgString = null;            // String for displaying non-error messages
+            java.sql.Statement s = null;        // SQL statement pointer
+            String inventorySelection = null;   // Inventory text string selected by user
+            IndexNotFound = false;              // Flag indicating that a string index was not found
+            String SQLServerIP = jTextField1.getText();
 
-            if (endIndex < 0 ) {
-                IndexNotFound = true;
-            } else {
-                beginIndex = endIndex+2; //skip past ">>"                                
-            }
-            
-            if ( !IndexNotFound )
+            // this is the selected line of text
+            inventorySelection =  jTextArea1.getSelectedText();
+
+            // make sure the selection is not blank
+            if ( inventorySelection != null )
             {
-                // Here we get the trailing index and parse out the productID
-                endIndex = inventorySelection.indexOf(":",beginIndex);
+                // get the product ID - here we get the leading index
+                beginIndex = 0;
+                endIndex = inventorySelection.indexOf(">>",beginIndex);
 
                 if (endIndex < 0 ) {
                     IndexNotFound = true;
                 } else {
-                    productID = inventorySelection.substring(beginIndex,endIndex);
-                }              
-            }
-           
-            // Now we decrement the inventory count of the item indicated by the productID we
-            // parsed out above from the indicated table.
-            
-            if ( !IndexNotFound )
-            {
-                jTextArea1.setText("");
-                jTextArea1.append( "Decrement ProductID: " + productID );
-
-                //If there is no connection error, then we form the SQL statement
-                //to decrement the inventory item count and then execute it.
-                InventoryApp api = new InventoryApp();
-                // if trees inventory selected
-                if (jRadioButton1.isSelected())
-                {
-                    msgString = api.decrementItems(SQLServerIP, "inventory", "trees", productID);
+                    beginIndex = endIndex+2; //skip past ">>"
                 }
 
-                // if strubs inventory selected
-                if (jRadioButton2.isSelected())
+                if ( !IndexNotFound )
                 {
-                    msgString = api.decrementItems(SQLServerIP, "inventory", "shrubs", productID);
+                    // Here we get the trailing index and parse out the productID
+                    endIndex = inventorySelection.indexOf(":",beginIndex);
+
+                    if (endIndex < 0 ) {
+                        IndexNotFound = true;
+                    } else {
+                        productID = inventorySelection.substring(beginIndex,endIndex);
+                    }
                 }
 
-                // if seeds inventory selected
-                if (jRadioButton3.isSelected())
-                {
-                    msgString = api.decrementItems(SQLServerIP, "inventory", "seeds", productID);
-                }
+                // Now we decrement the inventory count of the item indicated by the productID we
+                // parsed out above from the indicated table.
 
-                if (jRadioButton4.isSelected())
+                if ( !IndexNotFound )
                 {
-                    msgString = api.decrementItems(SQLServerIP, "leaftech", "cultureboxes", productID);
-                }
+                    jTextArea1.setText("");
+                    jTextArea1.append( "Decrement ProductID: " + productID );
 
-                if (jRadioButton5.isSelected())
-                {
-                    msgString = api.decrementItems(SQLServerIP, "leaftech", "processing", productID);
-                }
+                    //If there is no connection error, then we form the SQL statement
+                    //to decrement the inventory item count and then execute it.
+                    // if trees inventory selected
+                    if (jRadioButton1.isSelected())
+                    {
+                        msgString = api.decrementItems(SQLServerIP, "inventory", "trees", productID, token);
+                    }
 
-                if (jRadioButton6.isSelected())
-                {
-                    msgString = api.decrementItems(SQLServerIP, "leaftech", "referencematerials", productID);
-                }
+                    // if strubs inventory selected
+                    if (jRadioButton2.isSelected())
+                    {
+                        msgString = api.decrementItems(SQLServerIP, "inventory", "shrubs", productID, token);
+                    }
 
-                if (jRadioButton7.isSelected())
-                {
-                    msgString = api.decrementItems(SQLServerIP, "leaftech", "genomics", productID);
-                }
+                    // if seeds inventory selected
+                    if (jRadioButton3.isSelected())
+                    {
+                        msgString = api.decrementItems(SQLServerIP, "inventory", "seeds", productID, token);
+                    }
 
-                jTextArea1.append(msgString);
-                                       
+                    if (jRadioButton4.isSelected())
+                    {
+                        msgString = api.decrementItems(SQLServerIP, "leaftech", "cultureboxes", productID, token);
+                    }
+
+                    if (jRadioButton5.isSelected())
+                    {
+                        msgString = api.decrementItems(SQLServerIP, "leaftech", "processing", productID, token);
+                    }
+
+                    if (jRadioButton6.isSelected())
+                    {
+                        msgString = api.decrementItems(SQLServerIP, "leaftech", "referencematerials", productID, token);
+                    }
+
+                    if (jRadioButton7.isSelected())
+                    {
+                        msgString = api.decrementItems(SQLServerIP, "leaftech", "genomics", productID, token);
+                    }
+
+                    jTextArea1.append(msgString);
+
+                } else {
+
+                    jTextArea1.setText("");
+                    jTextArea1.append("\nNo items selected...\nSELECT ENTIRE INVENTORY LINE TO ADD ITEM TO ORDER\n(TRIPLE CLICK ITEM LINE)");
+
+                }
             } else {
 
                 jTextArea1.setText("");
-                jTextArea1.append("\nNo items selected...\nSELECT ENTIRE INVENTORY LINE TO ADD ITEM TO ORDER\n(TRIPLE CLICK ITEM LINE)");      
+                jTextArea1.append("\nNo items selected...\nSELECT ENTIRE INVENTORY LINE TO ADD ITEM TO ORDER\n(TRIPLE CLICK ITEM LINE)");
 
-            }
-        } else {
-
-            jTextArea1.setText("");
-            jTextArea1.append("\nNo items selected...\nSELECT ENTIRE INVENTORY LINE TO ADD ITEM TO ORDER\n(TRIPLE CLICK ITEM LINE)"); 
-
-        } // Blank string check
+            } // Blank string check
+        } catch (RemoteException ex) {
+            Logger.getLogger(InventoryMainFrame.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jTextField5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField5ActionPerformed
