@@ -1,6 +1,5 @@
 package src;
 
-
 import java.rmi.Naming;
 import java.rmi.RemoteException;
 import java.sql.*;
@@ -31,7 +30,7 @@ public class NewJFrame extends javax.swing.JFrame {
     String token = "";
     /* update when login or logout*/
 
-    /*handle all database operations*/
+ /*handle all database operations*/
     MiddlewareInterface client;
 
     /**
@@ -43,6 +42,7 @@ public class NewJFrame extends javax.swing.JFrame {
             initComponents();
             client = (MiddlewareInterface) Naming.lookup("//127.0.0.1:5050/middleware");
             jLabel1.setText("Order Management Application " + versionID);
+            notLoggedIn();
         } catch (Exception ex) {
             Logger.getLogger(NewJFrame.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -92,6 +92,12 @@ public class NewJFrame extends javax.swing.JFrame {
         jButton7 = new javax.swing.JButton();
         jButton8 = new javax.swing.JButton();
         jButton9 = new javax.swing.JButton();
+        jLabel14 = new javax.swing.JLabel();
+        jTextField7 = new javax.swing.JTextField();
+        jLabel15 = new javax.swing.JLabel();
+        jPasswordField1 = new javax.swing.JPasswordField();
+        jButton10 = new javax.swing.JButton();
+        jLabel16 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -226,10 +232,47 @@ public class NewJFrame extends javax.swing.JFrame {
             }
         });
 
+        jLabel14.setText("User Name :");
+
+        jTextField7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField7ActionPerformed(evt);
+            }
+        });
+
+        jLabel15.setText("Password :");
+
+        jPasswordField1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jPasswordField1ActionPerformed(evt);
+            }
+        });
+
+        jButton10.setText("Login");
+        jButton10.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton10ActionPerformed(evt);
+            }
+        });
+
+        jLabel16.setFont(new java.awt.Font("Ubuntu", 1, 15)); // NOI18N
+        jLabel16.setText("Login to access");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(300, 300, 300)
+                        .addComponent(jButton5))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(187, 187, 187)
+                        .addComponent(jLabel1)
+                        .addGap(149, 149, 149)
+                        .addComponent(jLabel16)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -245,65 +288,78 @@ public class NewJFrame extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel14)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel15)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButton10)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jScrollPane1)
                                     .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel4)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(jLabel11))
-                                    .addComponent(jScrollPane2)
-                                    .addComponent(jScrollPane3)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jScrollPane1)
+                                            .addComponent(jScrollPane2)
+                                            .addComponent(jScrollPane3)
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addGap(10, 10, 10)
+                                                .addComponent(jLabel2))
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addComponent(jButton1)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                                .addComponent(jButton2)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(jButton3)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(jButton6)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(jButton7)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(jButton8)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(jButton9))
+                                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                                .addComponent(jLabel4)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                .addComponent(jLabel11)))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
                                     .addGroup(layout.createSequentialGroup()
-                                        .addGap(10, 10, 10)
-                                        .addComponent(jLabel2))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jButton1)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(jButton2)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jButton3)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jButton6)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jButton7)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jButton8)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jButton9)))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
+                                        .addGap(9, 9, 9)
+                                        .addComponent(jLabel5)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(jTextField6))
+                                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(9, 9, 9)
-                                .addComponent(jLabel5)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jTextField6))
-                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel13)
-                            .addComponent(jLabel10))
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addGap(93, 93, 93))
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(300, 300, 300)
-                        .addComponent(jButton5))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(187, 187, 187)
-                        .addComponent(jLabel1)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel13)
+                                    .addComponent(jLabel10))
+                                .addGap(0, 0, Short.MAX_VALUE)))
+                        .addGap(93, 93, 93))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jLabel1)
-                .addGap(25, 25, 25)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(jLabel16))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel14)
+                    .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel15)
+                    .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton10))
+                .addGap(1, 1, 1)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
                     .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -360,15 +416,45 @@ public class NewJFrame extends javax.swing.JFrame {
                         .addComponent(jLabel2)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(142, Short.MAX_VALUE))
+                .addContainerGap(130, Short.MAX_VALUE))
         );
-
-        jButton6.getAccessibleContext().setAccessibleName("cultureboxes");
-        jButton6.getAccessibleContext().setAccessibleDescription("");
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    public void notLoggedIn() {
+        jButton1.setEnabled(false);
+        jButton2.setEnabled(false);
+        jButton3.setEnabled(false);
+        jButton4.setEnabled(false);
+        jButton5.setEnabled(false);
+        jButton6.setEnabled(false);
+        jButton7.setEnabled(false);
+        jButton8.setEnabled(false);
+        jButton9.setEnabled(false);
+        
+        jTextField7.setEditable(true);
+        jPasswordField1.setEditable(true);
+        jButton10.setText("Login");
+        jLabel16.setText("Login To Continue");
+
+    }
+
+    public void loggedIn(String username) {
+        jButton1.setEnabled(true);
+        jButton2.setEnabled(true);
+        jButton3.setEnabled(true);
+        jButton4.setEnabled(true);
+        jButton5.setEnabled(true);
+        jButton6.setEnabled(true);
+        jButton7.setEnabled(true);
+        jButton8.setEnabled(true);
+        jButton9.setEnabled(true);
+        jTextField7.setEditable(false);
+        jPasswordField1.setEditable(false);
+        jButton10.setText("Logout");
+        jLabel16.setText("Logged In as " + username);
+    }
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
 
         try {
@@ -376,9 +462,11 @@ public class NewJFrame extends javax.swing.JFrame {
             // getting the tree inventory. Once retieved, the tree inventory is
             // displayed in jTextArea1. From here the user can select an inventory
             // item by triple clicking the item.
-            String[] msgString = client.getAllItems(jTextField1.getText(), "inventory", "trees");
-            for (int i = 0; i < msgString.length; i++) {
-                jTextArea1.setText(msgString[i]);
+            String[] msgString = client.getAllItems(jTextField1.getText(), "inventory", "trees", token);
+            if (msgString != null) {
+                for (int i = 0; i < msgString.length; i++) {
+                    jTextArea1.setText(msgString[i]);
+                }
             }
         } catch (RemoteException ex) {
             Logger.getLogger(NewJFrame.class.getName()).log(Level.SEVERE, null, ex);
@@ -390,9 +478,9 @@ public class NewJFrame extends javax.swing.JFrame {
             // This button gets the selected line of text from the
             // inventory list window jTextArea1. The line of text is parsed and
             // the relevant information is placed in the order area (jTextArea2).
-            
-            String[] msgString = client.getSelectedIteam(jTextArea1.getSelectedText(), jTextField6.getText());
-            if (msgString.length == 1) {
+
+            String[] msgString = client.getSelectedIteam(jTextArea1.getSelectedText(), jTextField6.getText(), token);
+            if (msgString == null) {
                 jTextArea3.append(msgString[0]);
             } else {
                 jTextArea2.append(msgString[0]);
@@ -414,21 +502,21 @@ public class NewJFrame extends javax.swing.JFrame {
             // the orderinfo::orders table. It will also create another table where
             // the list of items is stored. This table is also in the orderinfo
             // database as well.
-            
+
             String[] msgString = client.submitOrder(jTextField3.getText(), jTextField4.getText(),
-                    jTextField5.getText(), jTextArea4.getText(), jTextField1.getText(), jTextField6.getText(), jTextArea2.getText().split("\\n"));
-            
-            if (msgString.length == 1) {
+                    jTextField5.getText(), jTextArea4.getText(), jTextField1.getText(), jTextField6.getText(), jTextArea2.getText().split("\\n"), "");
+
+            if (msgString == null) {
                 jTextArea3.append(msgString[0]);
-            } else if (msgString.length == 2) {
+            } else if (msgString.length == 1) {
                 jTextArea3.append(msgString[0]);
                 String[] items = jTextArea2.getText().split("\\n");
-                
+
                 for (int i = 0; i < items.length; i++) {
                     jTextArea3.append("\nitem #:" + i + ": " + items[i]);
                     if (items[i].length() > 0) {
                         jTextArea3.setText(msgString[1]);
-                        
+
                         // Clean up the display
                         jTextArea1.setText("");
                         jTextArea2.setText("");
@@ -440,15 +528,15 @@ public class NewJFrame extends javax.swing.JFrame {
                     }
                 }
             } else {
-                int pos = Integer.parseInt(msgString[3]);
+                int pos = Integer.parseInt(msgString[4]);
                 jTextArea3.append(msgString[0]);
                 String[] items = jTextArea2.getText().split("\\n");
-                
+
                 for (int i = 0; i < pos; i++) {
                     jTextArea3.append("\nitem #:" + i + ": " + items[i]);
                     if (items[i].length() > 0) {
                         jTextArea3.setText(msgString[1]);
-                        
+
                         // Clean up the display
                         jTextArea1.setText("");
                         jTextArea2.setText("");
@@ -477,10 +565,12 @@ public class NewJFrame extends javax.swing.JFrame {
             // getting the seed inventory. Once retieved, the seed inventory is
             // displayed in jTextArea1. From here the user can select an inventory
             // item by triple clicking the item.
-            
-            String[] msgString = client.getAllItems(jTextField1.getText(), "inventory", "seeds");
-            for (int i = 0; i < msgString.length; i++) {
-                jTextArea1.setText(msgString[i]);
+
+            String[] msgString = client.getAllItems(jTextField1.getText(), "inventory", "seeds", token);
+            if (msgString != null) {
+                for (int i = 0; i < msgString.length; i++) {
+                    jTextArea1.setText(msgString[i]);
+                }
             }
         } catch (RemoteException ex) {
             Logger.getLogger(NewJFrame.class.getName()).log(Level.SEVERE, null, ex);
@@ -493,10 +583,12 @@ public class NewJFrame extends javax.swing.JFrame {
             // getting the shrub inventory. Once retieved, the shrub inventory is
             // displayed in jTextArea1. From here the user can select an inventory
             // item by triple clicking the item.
-            
-            String[] msgString = client.getAllItems(jTextField1.getText(), "inventory", "shrubs");
-            for (int i = 0; i < msgString.length; i++) {
-                jTextArea1.setText(msgString[i]);
+
+            String[] msgString = client.getAllItems(jTextField1.getText(), "inventory", "shrubs", token);
+            if (msgString != null) {
+                for (int i = 0; i < msgString.length; i++) {
+                    jTextArea1.setText(msgString[i]);
+                }
             }
         } catch (RemoteException ex) {
             Logger.getLogger(NewJFrame.class.getName()).log(Level.SEVERE, null, ex);
@@ -513,10 +605,12 @@ public class NewJFrame extends javax.swing.JFrame {
             // getting the cultureboxes. Once retieved, the cultureboxes is
             // displayed in jTextArea1. From here the user can select an inventory
             // item by triple clicking the item.
-            
-            String[] msgString = client.getAllItems(jTextField1.getText(), "leaftech", "cultureboxes");
-            for (int i = 0; i < msgString.length; i++) {
-                jTextArea1.setText(msgString[i]);
+
+            String[] msgString = client.getAllItems(jTextField1.getText(), "leaftech", "cultureboxes", token);
+            if (msgString != null) {
+                for (int i = 0; i < msgString.length; i++) {
+                    jTextArea1.setText(msgString[i]);
+                }
             }
         } catch (RemoteException ex) {
             Logger.getLogger(NewJFrame.class.getName()).log(Level.SEVERE, null, ex);
@@ -529,14 +623,16 @@ public class NewJFrame extends javax.swing.JFrame {
         // displayed in jTextArea1. From here the user can select an inventory
         // item by triple clicking the item.
 
-        String[] msgString=null;
+        String[] msgString = null;
         try {
-            msgString = client.getAllItems(jTextField1.getText(), "leaftech", "genomics");
+            msgString = client.getAllItems(jTextField1.getText(), "leaftech", "genomics", token);
         } catch (RemoteException ex) {
             Logger.getLogger(NewJFrame.class.getName()).log(Level.SEVERE, null, ex);
         }
-        for (int i = 0; i < msgString.length; i++) {
-            jTextArea1.setText(msgString[i]);
+        if (msgString != null) {
+            for (int i = 0; i < msgString.length; i++) {
+                jTextArea1.setText(msgString[i]);
+            }
         }
     }//GEN-LAST:event_jButton7ActionPerformed
 
@@ -546,10 +642,12 @@ public class NewJFrame extends javax.swing.JFrame {
             // getting the processing. Once retieved, the genomics is
             // displayed in jTextArea1. From here the user can select an inventory
             // item by triple clicking the item.
-            
-            String[] msgString = client.getAllItems(jTextField1.getText(), "leaftech", "processing");
-            for (int i = 0; i < msgString.length; i++) {
-                jTextArea1.setText(msgString[i]);
+
+            String[] msgString = client.getAllItems(jTextField1.getText(), "leaftech", "processing", token);
+            if (msgString != null) {
+                for (int i = 0; i < msgString.length; i++) {
+                    jTextArea1.setText(msgString[i]);
+                }
             }
         } catch (RemoteException ex) {
             Logger.getLogger(NewJFrame.class.getName()).log(Level.SEVERE, null, ex);
@@ -562,15 +660,60 @@ public class NewJFrame extends javax.swing.JFrame {
             // getting the referencematerials. Once retieved, the referencematerials is
             // displayed in jTextArea1. From here the user can select an inventory
             // item by triple clicking the item.
-            
-            String[] msgString = client.getAllItems(jTextField1.getText(), "leaftech", "referencematerials");
-            for (int i = 0; i < msgString.length; i++) {
-                jTextArea1.setText(msgString[i]);
+
+            String[] msgString = client.getAllItems(jTextField1.getText(), "leaftech", "referencematerials", token);
+            if (msgString != null) {
+                for (int i = 0; i < msgString.length; i++) {
+                    jTextArea1.setText(msgString[i]);
+                }
             }
         } catch (RemoteException ex) {
             Logger.getLogger(NewJFrame.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jButton9ActionPerformed
+
+    private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
+        // TODO add your handling code here:
+        if (jButton10.getText() == "Login") {
+            try {
+                String username;
+                char[] password;
+                username = jTextField7.getText();
+                password = jPasswordField1.getPassword();
+                token = client.login(username, password);
+                System.out.println("Thank you : " + token);
+                if (!token.trim().equals("Error")) {
+                    loggedIn(username);
+                } else {
+                    token = "";
+                    jLabel16.setText("Wrong Username Password. Please Try again.");
+                }
+            } catch (RemoteException ex) {
+                Logger.getLogger(NewJFrame.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+        } else {
+
+            try {
+                if (client.logout(token)) {
+                    notLoggedIn();
+                } else {
+                    jLabel16.setText("Something went wrong. Please Try again.");
+                }
+            } catch (RemoteException ex) {
+                Logger.getLogger(NewJFrame.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+        }
+    }//GEN-LAST:event_jButton10ActionPerformed
+
+    private void jTextField7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField7ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField7ActionPerformed
+
+    private void jPasswordField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jPasswordField1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jPasswordField1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -585,6 +728,7 @@ public class NewJFrame extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton10;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
@@ -598,6 +742,9 @@ public class NewJFrame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -606,6 +753,7 @@ public class NewJFrame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JPasswordField jPasswordField1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
@@ -619,6 +767,7 @@ public class NewJFrame extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField4;
     private javax.swing.JTextField jTextField5;
     private javax.swing.JTextField jTextField6;
+    private javax.swing.JTextField jTextField7;
     // End of variables declaration//GEN-END:variables
 
 }

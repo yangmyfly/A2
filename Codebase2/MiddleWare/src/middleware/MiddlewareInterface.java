@@ -24,11 +24,11 @@ public interface MiddlewareInterface extends Remote {
     
     public HashMap<String,String> getOrders(String SQLServerIP,int status,String token) throws RemoteException;
     
-     public String[] getAllItems(String serverIP, String databaseName, String inventoryName) throws RemoteException;
+     public String[] getAllItems(String serverIP, String databaseName, String inventoryName, String token) throws RemoteException;
      
-     public String[] getSelectedIteam(String inventorySelection, String sTotalCost) throws RemoteException;
-     
-     public String[] submitOrder(String first, String last, String address, String phone, String serverIP, String sTotalCost, String[] items) throws RemoteException;
+     public String[] getSelectedIteam(String inventorySelection, String sTotalCost, String token) throws RemoteException;
+
+     public String[] submitOrder(String first, String last, String address, String phone, String serverIP, String sTotalCost, String[] items, String token) throws RemoteException;
 
      public String addItems(String SQLServerIP, String databaseName, String inventoryName, String productID, String description, Integer quantity, Float perUnitCost, String token) throws RemoteException;
 

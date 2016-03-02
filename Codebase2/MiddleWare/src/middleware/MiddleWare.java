@@ -293,15 +293,19 @@ public class MiddleWare implements MiddlewareInterface {
     }
 
     @Override
-    public String[] getAllItems(String serverIP, String databaseName, String inventoryName) throws RemoteException{
+    public String[] getAllItems(String serverIP, String databaseName, String inventoryName, String token) throws RemoteException{
         String information = "";  /*results including failure information*/
         Connection DBConn = null;           // MySQL connection handle
         Boolean connectError = false;       // Error flag
         ResultSet res = null;               // SQL query result set pointer
         Statement s = null;                 // SQL statement pointer
+        String [] error = null;
         
         // connect
         try{
+            if (!LoginAndOut.isLoggedIn(token)) {
+                return null;
+            }
             information = "\n>> Establishing Driver..."; 
             Class.forName("com.mysql.jdbc.Driver");
             information += "\n>> Setting up URL...";
@@ -343,7 +347,7 @@ public class MiddleWare implements MiddlewareInterface {
         return result;
     }
     
-    public String[] getSelectedIteam(String inventorySelection, String sTotalCost) throws RemoteException{
+    public String[] getSelectedIteam(String inventorySelection, String sTotalCost, String token) throws RemoteException{
         int beginIndex;                     // Parsing index
         int endIndex;                       // Parsing index
         Float fCost;                        // Item cost
@@ -354,6 +358,14 @@ public class MiddleWare implements MiddlewareInterface {
         
         IndexNotFound = false;
         sCost = null;
+        String[] error = null;
+        try {
+            if (!LoginAndOut.isLoggedIn(token)) {
+                return error;
+            }
+        }catch(Exception e){
+            e.printStackTrace();
+        }
         
         if ( inventorySelection != null )
         {
@@ -413,7 +425,7 @@ public class MiddleWare implements MiddlewareInterface {
         }
     }
     
-    public String[] submitOrder(String first, String last, String address, String phone, String serverIP, String sTotalCost, String[] items) throws RemoteException {                                         
+    public String[] submitOrder(String first, String last, String address, String phone, String serverIP, String sTotalCost, String[] items , String token) throws RemoteException {
         // This is the submit order button. This handler will check to make sure
         // that the customer information is provided, then create an entry in
         // the orderinfo::orders table. It will also create another table where
@@ -439,12 +451,16 @@ public class MiddleWare implements MiddlewareInterface {
         String SQLstatement = null;     // String for building SQL queries
         
         String information = "";
+        String[] error = null;
 
         // Check to make sure there is a first name, last name, address and phone
         if ((first.length()>0) && (last.length()>0) && (address.length()>0) && (phone.length()>0))
         {
             try
             {
+//                if (!LoginAndOut.isLoggedIn(token)) {
+//                    return error;
+//                }
                 information = "\n>> Establishing Driver...";
                 //load JDBC driver class for MySQL
                 Class.forName( "com.mysql.jdbc.Driver" );
